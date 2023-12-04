@@ -15,10 +15,15 @@ const userSchema = mongoose.Schema({
         unique: true,
         sparse: true
     },
-    kakaoId: {
+    username: {
         type: String,
-        unique: true,
-        sparse: true
+        required: true,
+        trim: true
+    },
+    admin: {
+        type: Number,
+        //0 => 일반유저, 1 => 어드민
+        default: 0
     }
 })
 

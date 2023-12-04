@@ -16,7 +16,7 @@ usersRouter.post('/login', (req, res, next) => {
 
         req.logIn(user, function (err) {
             if (err) { return next(err); }
-            res.redirect('/');
+            res.redirect('/products');
         })
     })(req, res, next)
 })
@@ -52,7 +52,7 @@ usersRouter.post('/signup', async (req, res) => {
 usersRouter.get('/google', passport.authenticate('google'));
 
 usersRouter.get('/google/callback', passport.authenticate('google', {
-    successReturnToOrRedirect: '/',
+    successReturnToOrRedirect: '/products',
     failureRedirect: '/login'
 }));
 
