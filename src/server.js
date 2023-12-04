@@ -8,6 +8,12 @@ const path = require('path');
 const config = require('config');
 const mainRouter = require('./routes/main.router');
 const usersRouter = require('./routes/users.router');
+const productsRouter = require('./routes/products.router');
+const cartRouter = require('./routes/cart.router');
+const adminCategoryRouter = require('./routes/admin-categories.router');
+const adminProductsRouter = require('./routes/admin-products.router');
+
+
 const serverConfig = config.get('server');
 
 
@@ -61,6 +67,11 @@ app.use('/static', express.static(path.join(__dirname, '../public')));
 
 app.use('/', mainRouter);
 app.use('/auth', usersRouter);
+app.use('/admin/categories', adminCategoryRouter);
+app.use('/admin/products', adminProductsRouter);
+app.use('/products', productsRouter);
+app.use('/cart', cartRouter);
+
 
 
 app.listen(port, () => {
