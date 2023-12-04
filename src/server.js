@@ -4,6 +4,7 @@ const { default: mongoose } = require('mongoose');
 const passport = require('passport');
 const app = express();
 const path = require('path');
+const flash = require('connect-flash');
 
 const config = require('config');
 const mainRouter = require('./routes/main.router');
@@ -42,6 +43,8 @@ app.use(function (request, response, next) {
     next()
 })
 
+app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport');
@@ -64,6 +67,12 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
+    res.locals.currentUser = req.user;
+    next();
+})
 
 app.use('/', mainRouter);
 app.use('/auth', usersRouter);
