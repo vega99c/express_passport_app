@@ -59,7 +59,6 @@ const googleStrategyConfig = new GoogleStrategy({
         } else {
             const user = new User();
             user.email = profile.emails[0].value;
-            user.username = profile.displayName;
             user.googleId = profile.id;
             user.save((err) => {
                 console.log(err);
