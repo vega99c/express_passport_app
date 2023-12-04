@@ -81,7 +81,10 @@ app.use('/admin/products', adminProductsRouter);
 app.use('/products', productsRouter);
 app.use('/cart', cartRouter);
 
-
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.send(err.message || 'Error Occurred')
+})
 
 app.listen(port, () => {
     console.log(`Listening on ${port}`);
